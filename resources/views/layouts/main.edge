@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  @entryPointStyles('app')
+  @!section('styles')
+</head>
+
+<body ng-app="">
+  @!component('component/sidebar')
+  <div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
+    @!component('component/xheader')
+    @!section('body')
+  </div>
+
+  <footer class="footer">
+    {{--  <div><a href="https://coreui.io">CoreUI </a><a href="https://coreui.io">Bootstrap Admin Template</a> © 2022
+      creativeLabs.</div>
+    <div class="ms-auto">Powered by&nbsp;<a href="https://coreui.io/docs/">CoreUI PRO UI Components</a></div>  --}}
+  </footer>
+
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  @entryPointScripts('app')
+  @!section('scripts')
+</body>
+
+</html>

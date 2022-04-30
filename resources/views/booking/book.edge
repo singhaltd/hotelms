@@ -1,0 +1,47 @@
+@layout('layouts/main')
+@set('title', 'Room')
+
+@section('body')
+<div class="card mt-3">
+    <div class="card-header">
+        Booking
+        <a href="{{route('pms.creatBooking')}}" class="btn btn-primary"><span class="cil-contrast btn-icon mr-2"></span>Booking</a>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Booking ID</th>
+                    <th scope="col">ຊື່ ແລະ ນາມສະກຸນ</th>
+                    <th scope="col">ຈຳນວນຫ້ອງ</th>
+                    <th scope="col">ຈຳນວນຄົນ</th>
+                    <th scope="col">ຈຳນວນວັນ</th>
+                    <th scope="col">ສັ່ງຈອງເມື່ອ</th>
+                    <th scope="col">ວັນທີ ເຂົ້າພັກ</th>
+                    <th scope="col">ວັນທີ ອອກ</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+               @each(x in rsBook) 
+                <tr>
+                    <td>{{x.id}}</td>
+                    <td>{{x.cust.fname + ' ' + x.cust.lname}}</td>
+                    <td>{{x.rqty}}</td>
+                    <td> {{x.adult}}</td>
+                    <td> </td>
+                    <td> {{x.check_in_date.toISOString().slice(0, 10)}} </td>
+                    <td> {{x.check_in_date.toISOString().slice(0, 10) + ' | ' + x.check_in_time}}</td>
+                    <td> {{x.check_out_date.toISOString().slice(0, 10) + ' | ' + x.check_out_time}}</td>
+                    <td> ເພີ່ມຕຽງດ່ຽວ</td>
+                </tr>
+                @endeach
+            </tbody>
+        </table>
+
+    </div>
+</div>
+@section('scripts')
+
+@endsection
+@endsection

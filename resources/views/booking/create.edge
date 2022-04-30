@@ -1,0 +1,348 @@
+@layout('layouts/main')
+@set('title', 'Room')
+@section('styles')
+@endsection
+@section('body')
+<form action="#" name="bookingform" method="POST">
+    {{ csrfField() }}
+    <div class="card">
+        <div class="card-header">
+            ຈ້ອງຫ້ອງພັກ
+        </div>
+        <div class="card-body">
+            <fieldset class="border p-4">
+                <legend  class="float-none w-auto">ຂໍ້ມູນລູກຄ້າ</legend>
+                <div class="row g-3">
+                    <input type="hidden" name="csid" id="customerId">
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="inpfullname" class="form-label">ຊື່ແທ້</label>
+                            <input type="text" placeholder="ຊື່ແທ້" class="form-control" id="inpfullname" name="fname">
+                            <div class="position-absolute d-none" id="di-search">
+                                <div class="card">
+                                    <div class="card-header" id="q-message">
+                                        adfkjas
+                                    </div>
+                                    <ul class="list-group" id="custList">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="inpfullname" class="form-label">ນາມສະກຸນ</label>
+                            <input type="text" class="form-control" placeholder="ນາມສະກຸນ" id="inpfullname" name="lname">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="ingender" class="form-label">ເພດ</label>
+                            <select class="form-select form-control select2" id="ingender" name="sex">
+                                <option selected>ເລືືອກເພດ</option>
+                                <option value="M">ຊາຍ</option>
+                                <option value="F">ຍິງ</option>
+                                <option value="O">ອື່ນໆ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="inpcountry" class="form-label">ປະເທດ</label>
+                            <select class="form-select form-control" id="inpcountry">
+                                <option selected>ເລືອກປະເທດ</option>
+                                @each(c in rsCountry)
+                                <option value="{{c.cid}}">{{c.name}}</option>
+                                @endeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="inpprovince" class="form-label">ແຂວງ</label>
+                            <select class="form-select form-control " id="inpprovince">
+                                <option value="" selected>ກາລຸນາເລືອກປະເທດ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="inpdistrict" class="form-label">ເມືອງ</label>
+                            <select class="form-select form-control " name="district_id" id="inpdistrict">
+                                <option value="" selected>ກາລຸນາເລືອກແຂວງ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">ບ້ານ</label>
+                            <input type="email" class="form-control" name="village" id="exampleFormControlInput1"
+                                placeholder="ບ້ານ">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">ວັນເດືອນປີເກີດ</label>
+                            <input type="date" class="form-control" name="dob" id="exampleFormControlInput1"
+                                placeholder="ບ້ານ">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">ອີເມວ</label>
+                            <input type="email" class="form-control" name="email" id="exampleFormControlInput1"
+                                placeholder="ອີເມວ">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">ເບີໂທຕິດຕໍ່</label>
+                            <input type="tel" class="form-control" name="phone" id="exampleFormControlInput1"
+                                placeholder="ເບີໂທຕິດຕໍ່">
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="inpdoctype" class="form-label">ປະເພດເອກະສານ</label>
+                            <select class="form-select form-control " name="doc_type" id="inpdoctype">
+                                <option value="person_card" selected>ບັດປະຈຳໂຕ</option>
+                                <option value="passport">ໜັງສືເດີນທາງ</option>
+                                <option value="family_book">ປື້ມສຳມະໂນຄົວ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="mb-3">
+                            <label for="inpdocno" class="form-label">ເລກເອກະສານ</label>
+                            <input type="tel" class="form-control" name="doc_no" id="inpdocno"
+                                placeholder="ເລກເອກະສານ">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row">
+                <div class="col-6">
+                    <fieldset class="border p-4 mt-3">
+                        <legend  class="float-none w-auto">ເຂົ້າພັກ / Check In</legend>
+                        <div class="row g-3">
+                            <div class="col-auto">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">ຈຳນວນຫ້ອງ</label>
+                                    <input type="number" class="form-control" name="rqty" id="exampleFormControlInput1" value="1">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">ຈຳນວນຜູ້ໃຫຍ່</label>
+                                    <input type="number" class="form-control" name="adulth" id="exampleFormControlInput1" value="1">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">ຈຳນວນເດັກນ້ອຍ</label>
+                                    <input type="number" class="form-control" name="children" id="exampleFormControlInput1"
+                                        value="0">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">ວັນທີປີເດືອນ ເຂົ້າພັກ</label>
+                                    <input type="date" class="form-control" name="check_in_date" id="exampleFormControlInput1"
+                                        min="2022-04-06">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">ເວລາ ເຂົ້າພັກ</label>
+                                    <input type="time" class="form-control" name="check_in_time" id="exampleFormControlInput1"
+                                        min="2022-04-06">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-6">
+                    <fieldset class="border p-4 mt-3">
+                        <legend  class="float-none w-auto">ປະເພດການຈອງ</legend>
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input" type="radio" name="typebook" id="inlineRadio1" value="SO">
+                            <label class="form-check-label" for="inlineRadio1">ຈາກອິນເຕີເນັດ</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" checked name="typebook" id="inlineRadio2" value="WK">
+                            <label class="form-check-label" for="inlineRadio2">ວອັກອິນ</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="typebook" id="inlineRadio3" value="MO">
+                            <label class="form-check-label" for="inlineRadio3">ແອັບ</label>
+                          </div>
+                    </fieldset>
+                    <fieldset class="border p-4 mt-3">
+                        <legend  class="float-none w-auto">ອອກ / Check Out</legend>
+                        <div class="row g-3">
+                            <div class="col-auto mt-0">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">ວັນທີປີເດືອນ ເຂົ້າພັກ</label>
+                                    <input type="date" class="form-control" name="check_out_date" id="exampleFormControlInput1"
+                                        min="2022-04-06">
+                                </div>
+                            </div>
+                            <div class="col-auto mt-0">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">ເວລາ ເຂົ້າພັກ</label>
+                                    <input type="time" class="form-control" name="check_out_time" id="exampleFormControlInput1"
+                                        >
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="card mt-3">
+        <div class="card-body">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">ຫ້ອງພັກ</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Check In</a>
+                </li>
+              </ul>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ໝາຍເລກຫ້ອງ</th>
+                        <th scope="col">ປະເພດຫ້ອງ</th>
+                        <th scope="col">Date Check In</th>
+                        <th scope="col">Date Check Out</th>
+                        <th scope="col">ຈຳນວນວັນ</th>
+                        <th scope="col">ໝາຍເຫດ</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>001</td>
+                        <td>standard</td>
+                        <td> ເພີ່ມຕຽງດ່ຽວ</td>
+                        <td> ເພີ່ມຕຽງດ່ຽວ</td>
+                        <td> ເພີ່ມຕຽງດ່ຽວ</td>
+                        <td> ເພີ່ມຕຽງດ່ຽວ</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <button type="button" class="btn" onclick="validateform()">BOOK</button>
+</form>
+@end
+@section('scripts')
+<script type="text/javascript">
+    document.getElementById('inpcountry').addEventListener('change', function () {
+        let el = document.getElementById('inpprovince')
+        el.innerHTML = '<option selected>ເລືອກແຂວງ</option>'
+        fetch('/api/city/province/' + this.value)
+            .then(response => response.json())
+            .then(data =>
+                data.forEach(e => {
+                    el.innerHTML += '<option value="' + e.id + '">' + e.name + '</option>'
+                })
+
+            );
+    });
+
+    document.getElementById('inpprovince').addEventListener('change', function () {
+        let el = document.getElementById('inpdistrict')
+        el.innerHTML = '<option selected>ເລືອກເມືອງ</option>'
+        fetch('/api/city/districts/' + this.value)
+            .then(response => response.json())
+            .then(data =>
+                data.forEach(e => {
+                    el.innerHTML += '<option value="' + e.id + '">' + e.name + '</option>'
+                })
+
+            );
+    });
+
+
+    function validateform() {
+        
+        const formData = new FormData();
+        var fname = document.bookingform.fname.value;
+        var lname = document.bookingform.lname.value;
+        var district = document.bookingform.district_id.value;
+        var village = document.bookingform.village.value;
+        var email = document.bookingform.email.value;
+        var mobile = document.bookingform.phone.value;
+        var dob = document.bookingform.dob.value;
+        var typebook = document.bookingform.typebook.value;
+        var csrfKey = document.getElementsByName('_csrf')[0]
+        formData.append('_csrf', csrfKey.value);
+        formData.append('fname',fname)
+        formData.append('lname',lname)
+        formData.append('mobile',mobile)
+        formData.append('village',village)
+        formData.append('email',email)
+        formData.append('dob',dob)
+        formData.append('booktype',typebook)
+        formData.append('doc_type',document.bookingform.doc_type.value)
+        formData.append('doc_no',document.bookingform.doc_no.value)
+        formData.append('sex',document.bookingform.sex.value)
+        //session booking
+        formData.append('id',makeid(10))
+        formData.append('rqty',document.bookingform.rqty.value)
+        formData.append('adulth',document.bookingform.adulth.value)
+        formData.append('children',document.bookingform.children.value)
+        formData.append('check_in_date',document.bookingform.check_in_date.value)
+        formData.append('check_in_time',document.bookingform.check_in_time.value)
+        formData.append('check_out_date',document.bookingform.check_out_date.value)
+        formData.append('check_out_time',document.bookingform.check_out_time.value)
+        // if (district == null || district == "") {
+        //     return false;
+        // }
+        fetch('/api/booking/create', {
+                method: 'POST',
+                body: formData
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
+    // $('#inpprovince').on('change', () => {
+    //     console.log($(this).val())
+    //     fetch('/api/city/province/LA')
+    //         .then(response => response.json())
+    //         .then(data => console.log(data));
+    // })
+    // });
+    var ffname = document.querySelector('input[name="fname"]');
+    ffname.addEventListener('keyup',function(ev){
+        let elm = document.getElementById('di-search');
+        fetch('/api/customer/find/'+ffname.value).then(response => response.json())
+            .then(data => {
+                if(data.length > 0){
+                    elm.classList.remove('d-none')
+                    document.getElementById('custList').innerHTML = '<li class="list-group-item">An item</li>'
+                }else{
+                    elm.classList.add('d-none')
+                }
+            })
+    })
+
+    function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * 
+        charactersLength));
+   }
+   return result;
+}
+</script>
+@end

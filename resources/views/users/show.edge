@@ -1,0 +1,47 @@
+@layout('layouts/main')
+@set('title', 'Room')
+
+@section('body')
+<div class="card">
+    <div class="card-header">
+        Users
+    </div>
+   
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ຊື່ຜູ້ໃຊ້ລະບົບ</th>
+                    <th scope="col">ອີເມວ</th>
+                    <th scope="col">ເບີໂທ</th>
+                    <th scope="col">ຄຳອະບາຍ</th>
+                    <th scope="col">ສະຖານະ</th>
+                    <th scope="col">ສິດຜູ້ໃຊ້ລະບົບ</th>
+                    <th scope="col">ໝາຍເຫດ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @each(x in rsUsers)
+                <tr>
+                    <td>{{x.username}}</td>
+                    <td>{{x.email}}</td>
+                    <td>{{x.mobile}}</td>
+                    <td>{{x.mobile}}</td>
+                    <td>{{x.mobile}}</td>
+                    <td>{{x.mobile}}</td>
+                    <td>{{x.mobile}}</td> 
+                    <td><div class="d-flex">
+                        <button type="button" class="btn btn-outline-primary">ແກ້ໄຂ</button>
+                        <button type="button" class="btn btn-outline-primary">ລົບ</button>
+                    </div></td> 
+                </tr>
+                @endeach
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section('scripts')
+
+@endsection
+@endsection

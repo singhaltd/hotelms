@@ -1,0 +1,34 @@
+@layout('layouts/main')
+@set('title', 'Room Facility')
+
+@section('body')
+<div class="card">
+    <div class="card-header">
+        Facility
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">title</th>
+                    <th scope="col">icon</th>
+                    <th scope="col">remark</th>
+                </tr>
+            </thead>
+            <tbody>
+                @each(x in rsFacility)
+                <tr>
+                    <td>{{x.title}}</td>
+                    <td>{{x.icon}}</td>
+                    <td>{{x.remark}}</td>
+                </tr>
+                @endeach
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section('scripts')
+
+@endsection
+@endsection

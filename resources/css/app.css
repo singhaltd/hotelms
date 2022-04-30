@@ -1,0 +1,7 @@
+svg.nav-icon {
+    -webkit-filter: invert(100%);
+}
+
+html *{
+    font-family: 'Lao_SomVang',Roboto!important;
+}
